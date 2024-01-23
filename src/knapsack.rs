@@ -1,4 +1,4 @@
-
+use std::cmp::Reverse;
 
 /**
  * 1-5. [4] The knapsack problem is as follows: given a set of integers S =
@@ -103,6 +103,8 @@ fn find_knapsack_target(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
 
         if *number <= remaining_space {
             knapsack.push(number);
+        } else {
+            continue;
         }
 
         let summed = knapsack.iter().map(|&&num| num).sum::<u32>();
@@ -126,6 +128,15 @@ pub fn find_knapsack_target_best_fit(combo: &mut Vec<u32>, target: u32) -> Vec<&
     combo.sort();
 
     println!("Best fit {:?}", combo);
+    find_knapsack_target(combo, target)
+}
+
+pub fn find_knapsack_target_largest_to_smallest_fit(combo: &mut Vec<u32>, target: u32) -> Vec<&u32> {
+
+    // Sort the unsigned integers in descending order, before we attempt to fit them
+    combo.sort_by_key(|number| Reverse(*number));
+
+    println!("Largest to smallest fit {:?}", combo);
     find_knapsack_target(combo, target)
 }
 

@@ -71,4 +71,30 @@ mod tests {
         // Compare the pointers of both vectors.
         assert_eq!(expected_subset, target_subset);
     }
+
+
+    #[test]
+    fn should_meet_target_using_largest_to_smallest_algo() {
+        // Test data + expected pointers
+        let mut test_vector: Vec<u32> = vec![23, 10, 9, 2, 50, 1];
+        let expected_subset: Vec<&u32> = vec![&10, &9, &2, &1];
+        // Find subset pointers which match our target value.
+        let target_subset = knapsack::find_knapsack_target_largest_to_smallest_fit(&mut test_vector, EXPECTED_TARGET);
+        // Compare the pointers of both vectors.
+        assert_eq!(expected_subset, target_subset);
+    }
+
+    /*
+     * (c) Put the elements of S in the knapsack from largest to smallest.
+     */
+    #[test]
+    fn should_fail_to_meet_target_using_largest_to_smallest_algo_counter_example() {
+        // Test data + expected pointers
+        let mut test_vector: Vec<u32> = vec![10, 9, 2, 5];
+        let expected_subset: Vec<&u32> = vec![];
+        // Find subset pointers which match our target value.
+        let target_subset = knapsack::find_knapsack_target_largest_to_smallest_fit(&mut test_vector, EXPECTED_TARGET);
+        // Compare the pointers of both vectors.
+        assert_eq!(expected_subset, target_subset);
+    }
 }
