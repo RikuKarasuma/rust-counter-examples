@@ -1,12 +1,11 @@
 
+
 /**
  * 1-5. [4] The knapsack problem is as follows: given a set of integers S =
  *      {s1, s2, . . ., sn}, and a target number T , ﬁnd a subset of S that
  *      adds up exactly to T . For example, there exists a subset within
  *      S = {1, 2, 5, 9, 10} that adds up to T = 22 but not T = 23.
  */
-
-
 
 // Used to generate our possible combinations.
 fn binary_subset_generator(combo: &Vec<u32>) -> Vec<Vec<&u32>> {
@@ -65,7 +64,7 @@ fn binary_subset_generator(combo: &Vec<u32>) -> Vec<Vec<&u32>> {
     possible_combinations
 }
 
-pub fn find_knapsack_target(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
+pub fn find_knapsack_target_binary_gen(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
 
     if combo.is_empty() {
         return vec![];
@@ -93,15 +92,15 @@ pub fn find_knapsack_target(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
     vec![] // could not meet target!
 }
 
-pub fn find_knapsack_target_first_fit(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
-    println!("First fit {:?}", combo);
-
+fn find_knapsack_target(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
     let mut knapsack: Vec<&u32> = vec![];
 
     for number in combo.iter() {
         let summed = knapsack.iter().map(|&&num| num).sum::<u32>();
         let remaining_space = target - summed;
-        println!("Summed: {}, remaining: {}, trying: {}", summed, remaining_space, number);
+
+        // println!("Summed: {}, remaining: {}, trying: {}", summed, remaining_space, number);
+
         if *number <= remaining_space {
             knapsack.push(number);
         }
@@ -114,3 +113,19 @@ pub fn find_knapsack_target_first_fit(combo: &Vec<u32>, target: u32) -> Vec<&u32
 
     vec![] // could not meet target!
 }
+
+pub fn find_knapsack_target_first_fit(combo: &Vec<u32>, target: u32) -> Vec<&u32> {
+    println!("First fit {:?}", combo);
+
+    find_knapsack_target(combo, target)
+}
+
+pub fn find_knapsack_target_best_fit(combo: &mut Vec<u32>, target: u32) -> Vec<&u32> {
+
+    // Sort the unsigned integers in ascending order, before we attempt to fit them
+    combo.sort();
+
+    println!("Best fit {:?}", combo);
+    find_knapsack_target(combo, target)
+}
+
