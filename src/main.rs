@@ -1,6 +1,8 @@
 
 mod knapsack_tests;
 mod knapsack;
+mod set_cover;
+mod set_cover_tests;
 
 fn main() {
     // Refer to knapsack_tests.rs, for more in depth scenarios'.
