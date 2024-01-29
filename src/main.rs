@@ -3,6 +3,8 @@ mod knapsack_tests;
 mod knapsack;
 mod set_cover;
 mod set_cover_tests;
+mod maximum_clique;
+mod maximum_clique_tests;
 
 fn main() {
     // Refer to knapsack_tests.rs, for more in depth scenarios'.
